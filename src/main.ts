@@ -13,6 +13,48 @@ const player = new ex.Actor({
   color: ex.Color.Red,
 });
 
+game.input.keyboard.on('press', (evt) => {
+  const { key } = evt;
+  let velocity = 200;
+  switch (key) {
+    case 'KeyW':
+      player.vel.y = -velocity;
+      break;
+    case 'KeyA':
+      player.vel.x = -velocity;
+      break;
+    case 'KeyS':
+      player.vel.y = velocity;
+      break;
+    case 'KeyD':
+      player.vel.x = velocity;
+      break;
+
+    default:
+      break;
+  }
+});
+game.input.keyboard.on('release', (evt) => {
+  const { key } = evt;
+  switch (key) {
+    case 'KeyW':
+      player.vel.y = 0;
+      break;
+    case 'KeyA':
+      player.vel.x = 0;
+      break;
+    case 'KeyS':
+      player.vel.y = 0;
+      break;
+    case 'KeyD':
+      player.vel.x = 0;
+      break;
+
+    default:
+      break;
+  }
+});
+
 game.add(player);
 
 game.start();
