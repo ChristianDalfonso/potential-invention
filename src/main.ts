@@ -1,4 +1,8 @@
 import * as ex from 'excalibur';
+import { TiledMapResource } from '@excaliburjs/plugin-tiled';
+import { TiledMap } from './TileMap';
+const tiledMap = new TiledMap('src/assets/scenes/mapone_map.json');
+const loader = new ex.Loader([tiledMap]);
 
 const game = new ex.Engine({
   width: 800,
@@ -55,6 +59,8 @@ game.input.keyboard.on('release', (evt) => {
   }
 });
 
-game.add(player);
-
-game.start();
+game.start(loader).then(function () {
+  console.log('Game loaded');
+  tiledMap.addTiledMapToScene(game.currentScene);
+  game.add(player);
+});
